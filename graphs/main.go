@@ -126,16 +126,16 @@ func getLowestFScore(openSet map[Coordinate2D]bool, fScore map[Coordinate2D]int)
 
 func getNeighbors(grid [][]byte, coord Coordinate2D, obstructedTileSymbols map[byte]bool) []Coordinate2D {
 	neighbors := make([]Coordinate2D, 0)
-	if coord.X > 0 && obstructedTileSymbols[grid[coord.Y][coord.X - 1]] {
+	if coord.X > 0 && !obstructedTileSymbols[grid[coord.Y][coord.X - 1]] {
 		neighbors = append(neighbors, Coordinate2D{coord.X - 1, coord.Y})
 	}
-	if coord.X < len(grid[0]) - 1 && obstructedTileSymbols[grid[coord.Y][coord.X + 1]] {
+	if coord.X < len(grid[0]) - 1 && !obstructedTileSymbols[grid[coord.Y][coord.X + 1]] {
 		neighbors = append(neighbors, Coordinate2D{coord.X + 1, coord.Y})
 	}
-	if coord.Y > 0 && obstructedTileSymbols[grid[coord.Y - 1][coord.X]] {
+	if coord.Y > 0 && !obstructedTileSymbols[grid[coord.Y - 1][coord.X]] {
 		neighbors = append(neighbors, Coordinate2D{coord.X, coord.Y - 1})
 	}
-	if coord.Y < len(grid) - 1 && obstructedTileSymbols[grid[coord.Y + 1][coord.X]] {
+	if coord.Y < len(grid) - 1 && !obstructedTileSymbols[grid[coord.Y + 1][coord.X]] {
 		neighbors = append(neighbors, Coordinate2D{coord.X, coord.Y + 1})
 	}
 	return neighbors

@@ -5,7 +5,18 @@ import (
 	"os"
 	"sort"
 	"strings"
+	"time"
 )
+
+var now = time.Now()
+
+func TrackTimeFromNow(name string) {
+	TrackTime(now, name)
+}
+func TrackTime(start time.Time, name string) {
+	elapsed := time.Since(start)
+	fmt.Printf("%s took %s\n", name, elapsed)
+}
 
 func ReadFile(filename string) []string {
 	f, err := os.ReadFile("inputs/" + filename)

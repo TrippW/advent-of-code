@@ -13,6 +13,7 @@ var now = time.Now()
 func TrackTimeFromNow(name string) {
 	TrackTime(now, name)
 }
+
 func TrackTime(start time.Time, name string) {
 	elapsed := time.Since(start)
 	fmt.Printf("%s took %s\n", name, elapsed)
@@ -26,11 +27,42 @@ func ReadFile(filename string) []string {
 	return strings.Split(string(f), "\n")
 }
 
-func AbsDiff(x, y int) int {
+type Number interface {
+    int | float64 | float32 | int64 | int32 | int16 | int8 | uint | uint64 | uint32 | uint16 | uint8
+}
+
+func Abs[T Number](x T) T {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
+func AbsDiff[T Number](x, y T) T {
 	if x < y {
 		return y - x
 	}
 	return x - y
+}
+
+func MinOf[T Number](vars ...T) T {
+	min := vars[0]
+	for _, v := range vars {
+		if v < min {
+			min = v
+		}
+	}
+	return min
+}
+
+func MaxOf[T Number](vars ...T) T {
+	max := vars[0]
+	for _, v := range vars {
+		if v > max {
+			max = v
+		}
+	}
+	return max
 }
 
 // if ColAsList is true, then each column will be a list of strings. All rows must have the same number of columns

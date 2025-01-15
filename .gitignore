@@ -1,3 +1,6 @@
 tmp
 inputs
 outputs
+
+*.txt
+*.DS_Store
